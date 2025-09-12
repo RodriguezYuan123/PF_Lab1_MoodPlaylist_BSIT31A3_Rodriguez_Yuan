@@ -1,0 +1,53 @@
+﻿@model MoodPlaylistGenerator.ViewModels.CreateSongViewModel
+@{
+    ViewData["Title"] = "Add New Song";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>🎵 Add New Song</h2>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Songs
+    </a>
+</div>
+
+<div class="card p-4 shadow-sm">
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Artist" class="form-label"></label>
+            <input asp-for="Artist" class="form-control" />
+            <span asp-validation-for="Artist" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="YouTubeUrl" class="form-label"></label>
+            <input asp-for="YouTubeUrl" class="form-control" />
+            <span asp-validation-for="YouTubeUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SelectedMoodIds" class="form-label">Assign Moods</label>
+            <select asp-for="SelectedMoodIds" asp-items="@(new SelectList(Model.AvailableMoods, "Id", "Name"))"
+                    class="form-control" multiple></select>
+            <span asp-validation-for="SelectedMoodIds" class="text-danger"></span>
+        </div>
+
+        <div class="d-grid gap-2 d-md-block">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Song
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
