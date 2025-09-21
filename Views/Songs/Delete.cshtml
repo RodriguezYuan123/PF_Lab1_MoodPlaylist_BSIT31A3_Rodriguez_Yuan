@@ -1,0 +1,53 @@
+﻿@model MoodPlaylistGenerator.Models.Song
+
+@{
+    ViewData["Title"] = "Delete Song";
+}
+
+<h1 class="display-4 text-danger">Delete Song</h1>
+<p class="lead">Are you sure you want to delete this song?</p>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-3">
+                Title
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt class="col-sm-3">
+                Artist
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Artist)
+            </dd>
+
+            <dt class="col-sm-3">
+                Source
+            </dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrEmpty(Model.YouTubeUrl))
+                {
+                    <a href="@Model.YouTubeUrl" target="_blank">YouTube Video</a>
+                }
+                else if (!string.IsNullOrEmpty(Model.FileName))
+                {
+                    <span>Local File: @Model.FileName</span>
+                }
+                else
+                {
+                    <span>N/A</span>
+                }
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Confirm Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

@@ -17,6 +17,9 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<SongService>();
 builder.Services.AddScoped<PlaylistService>();
 
+//Added media upload service
+builder.Services.AddScoped<IMediaUploadService, MediaUploadService>();
+
 // Add authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
